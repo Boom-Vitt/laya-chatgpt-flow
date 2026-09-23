@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">Laya + ChatGPT — a local action model, two real video outputs</title>
+  <desc id="desc">ChatGPT plans, Laya 421M selects browser actions, Google Flow renders, and FFmpeg assembles a 16-second video. One demonstration pair, both reviewed.</desc>
+  <rect width="1200" height="440" rx="24" fill="#101b24"/>
+  <path d="M0 368H1200M730 0V440" stroke="#283640"/>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <rect x="44" y="42" width="240" height="28" rx="14" fill="#253a3b"/>
+    <circle cx="62" cy="56" r="4" fill="#b6ed91"/>
+    <text x="74" y="61" font-size="11" font-weight="700" letter-spacing="1.6" fill="#d0efc0">LOCAL MODEL · REAL VIDEO</text>
+    <text x="42" y="149" font-size="62" font-weight="700" letter-spacing="-2.5" fill="#f7f5ee">Laya + ChatGPT</text>
+    <text x="45" y="192" font-size="25" fill="#bdc8cd">Small actions. A complete video workflow.</text>
+    <text x="45" y="240" font-size="17" fill="#91a4ae">ChatGPT thinks. Laya selects browser actions.</text>
+    <text x="45" y="267" font-size="17" fill="#91a4ae">Google Flow creates the clips.</text>
+    <rect x="44" y="301" width="154" height="34" rx="7" fill="#ffaf80"/>
+    <text x="121" y="323" text-anchor="middle" font-size="12" font-weight="700" letter-spacing=".5" fill="#18242d">421M · ON YOUR MAC</text>
+    <rect x="212" y="301" width="177" height="34" rx="7" fill="#21303a" stroke="#3c4d57"/>
+    <text x="300" y="323" text-anchor="middle" font-size="12" font-weight="700" fill="#e1e7e8">NO MODEL API KEYS</text>
+    <text x="780" y="57" font-size="11" font-weight="700" letter-spacing="2" fill="#829aa7">FROM BRIEF TO FINAL.MP4</text>
+    <g fill="#172731" stroke="#354955">
+      <rect x="780" y="80" width="370" height="65" rx="10"/>
+      <rect x="780" y="162" width="370" height="65" rx="10"/>
+      <rect x="780" y="244" width="370" height="65" rx="10"/>
+    </g>
+    <g fill="none" stroke="#58707e" stroke-width="2">
+      <path d="M965 145v17m-4-5 4 5 4-5M965 227v17m-4-5 4 5 4-5"/>
+    </g>
+    <g font-size="12" font-weight="700">
+      <text x="800" y="117" fill="#ffaf80">01</text>
+      <text x="800" y="199" fill="#b6ed91">02</text>
+      <text x="800" y="281" fill="#b0d6ec">03</text>
+    </g>
+    <g fill="#f4f5ee" font-size="19" font-weight="700">
+      <text x="840" y="108">ChatGPT</text>
+      <text x="840" y="190">Laya v10</text>
+      <text x="840" y="272">Google Flow</text>
+    </g>
+    <g fill="#9db1bd" font-size="12">
+      <text x="840" y="128">Plan · prompts · recovery</text>
+      <text x="840" y="210">Choose fields · type · submit</text>
+      <text x="840" y="292">2 × 8s shots → FFmpeg → 16s clip</text>
+    </g>
+    <text x="965" y="340" text-anchor="middle" fill="#91a4ae" font-size="12">Human review before use</text>
+    <text x="45" y="410" fill="#c0d0d8" font-size="13" letter-spacing=".5">1 PAIR · 2 VIDEOS · THAI AUDIO · REVIEWED OUTPUTS</text>
+    <text x="1154" y="410" text-anchor="end" fill="#91a4ae" font-size="12">A demonstration, not a savings claim.</text>
+  </g>
+</svg>

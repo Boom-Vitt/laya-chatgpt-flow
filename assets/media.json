@@ -1,0 +1,32 @@
+{
+  "description": "Original final videos explicitly approved by the user for publication in this repository. Uploaded unchanged as GitHub attachments.",
+  "published_on": "2026-09-23",
+  "videos": [
+    {
+      "run": "baseline-1",
+      "url": "https://github.com/user-attachments/assets/84b0a064-14fc-4dab-b465-432220a6d841",
+      "sha256": "810d7ff5d9df660f1778cc99993807f9462a8822c34a5c90d96d6b62dbe8ac34",
+      "bytes": 2166613,
+      "duration_s": 16.0,
+      "width": 720,
+      "height": 1280,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "qc": "passed_user_full_audiovisual_review",
+      "presentation_edits": false
+    },
+    {
+      "run": "hybrid-1",
+      "url": "https://github.com/user-attachments/assets/3ddb7ce9-8d24-45c2-b5a0-62def2f533c6",
+      "sha256": "c3e473c7fdf9c7b60c0937c6041bb6e5d77935047b6fbd650a4bec8391fdafd4",
+      "bytes": 2841967,
+      "duration_s": 16.0,
+      "width": 720,
+      "height": 1280,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "qc": "passed_user_full_audiovisual_review",
+      "presentation_edits": false
+    }
+  ]
+}

@@ -126,6 +126,15 @@
     "remaining_task_allowance": 80,
     "flow_ui_balance_after_hybrid_1": 0,
     "purchases": 0,
-    "note": "Task allowance is not an account credit balance. Additional work requires available account credits."
+    "note": "Historical execution allowance, not an account balance. User ended work after one pair; no remaining allowance will be used without a new request."
+  },
+  "study_scope": {
+    "status": "completed_single_pair_demonstration",
+    "original_planned_pairs": 3,
+    "completed_pairs": 1,
+    "final_requested_pairs": 1,
+    "stopped_additional_runs_by_user": true,
+    "quota_monitoring": false,
+    "note": "User explicitly chose one pair as the final scope. Original statistical comparison gate remains unchanged; percentages stay null."
   }
 }
