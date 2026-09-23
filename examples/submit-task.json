@@ -1,0 +1,10 @@
+{
+  "id": "shot-1-submit",
+  "goal": "The requested video prompt is filled. Click Start generation once to create one video, then wait for a ready video.",
+  "click": ["Start generation"],
+  "type": {
+    "Video prompt": "An 8-second vertical 9:16 product video. A plain cream ceramic mug with a curved handle and no logo sits on a wooden table by a window in soft morning light. Slow camera push-in. One adult hand gently turns the mug. Keep the mug shape stable, realistic fingers, no text overlays or claims. A warm Thai female voice says exactly: มุมพักเล็ก ๆ กับแก้วใบโปรด. Quiet natural room ambience."
+  },
+  "submit": {"name": "Start generation", "credits": 10, "evidence": "REPLACE with current verified model, dimensions, duration, x1 and displayed credit price"},
+  "done_video": 1
+}

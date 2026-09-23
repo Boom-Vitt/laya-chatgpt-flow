@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "tokenizer": "o200k_base",
+  "metric": "visible text counted once",
+  "limitations": [
+    "Not actual OpenAI input/output, reasoning, cached or billed usage.",
+    "Excludes hidden prompts, images, internal reasoning and context replay.",
+    "Laya tokens use a different tokenizer and are reported separately.",
+    "Elapsed time includes human/tool pauses and cold model load; load is also itemized.",
+    "Only sanitized aggregates are exported; raw local logs remain private."
+  ],
+  "runs": [
+    {
+      "arm": "pilot",
+      "brain": "codex-development",
+      "pair": 0,
+      "status": "pilot_downloaded",
+      "model_label": "development-only",
+      "protocol": "mug-v1",
+      "elapsed_s": 1916.8826248750556,
+      "run": "pilot",
+      "visible_input_tokens_est": null,
+      "visible_output_tokens_est": null,
+      "visible_total_tokens_est": null,
+      "comparable": false,
+      "transcript_source": null,
+      "laya_inference_s": 1.9855300420895219,
+      "model_load_s": 49.489355959231034,
+      "flow_wait_s": 45.41313674999401,
+      "download_s": 0.7129165842197835,
+      "assembly_s": null,
+      "laya_input_tokens": 2143,
+      "needs_reasoning_count": 0,
+      "action_error_count": 1,
+      "model_error_count": 0,
+      "credit_reserved_count": 1,
+      "chatgpt_step_count": 0,
+      "laya_decision_count": 2,
+      "credits_reserved": 10
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "attempts": 0,
+      "passed": 0,
+      "elapsed_median_s": null,
+      "elapsed_min_s": null,
+      "elapsed_max_s": null
+    },
+    "hybrid": {
+      "attempts": 0,
+      "passed": 0,
+      "elapsed_median_s": null,
+      "elapsed_min_s": null,
+      "elapsed_max_s": null
+    }
+  },
+  "comparison": {
+    "token_reduction_pct": null,
+    "time_reduction_pct": null,
+    "reason": "requires exactly six registered attempts; do not drop failures or retries"
+  }
+}

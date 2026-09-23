@@ -1,0 +1,4 @@
+interface:
+  display_name: "Laya + ChatGPT Flow"
+  short_description: "Make Flow clips with local Laya and compare measured runs"
+  default_prompt: "Use $laya-chatgpt-flow to create a product clip in Google Flow and record the run."

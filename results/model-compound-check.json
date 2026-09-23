@@ -1,0 +1,18 @@
+{
+  "model": "cklxx/laya-browser",
+  "revision": "8a7e625b481d292d830acf22a2feec81554575fa",
+  "checkpoint": "v10",
+  "device": "cpu",
+  "load_s": 21.678541417000815,
+  "decision": {
+    "operation": "CLICK",
+    "target": "1",
+    "snapshot": "fixture",
+    "laya_input_tokens": 506,
+    "inference_s": 0.40512520796619356,
+    "confidence": 0.8452
+  },
+  "expected": "TYPE_TEXT target 0",
+  "passed": false,
+  "scope": "synthetic observation; not a Flow render"
+}

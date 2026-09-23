@@ -1,0 +1,20 @@
+[project]
+name = "laya-chatgpt-flow"
+version = "0.1.0"
+description = "Local Laya browser decisions for ChatGPT Work and honest Flow benchmarks"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "laya==0.3.6",
+  "playwright>=1.55,<2",
+  "tiktoken>=0.12,<1",
+  "transformers>=4.48,<5",
+]
+
+[dependency-groups]
+dev = ["ruff>=0.13,<1"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

@@ -1,0 +1,16 @@
+{
+  "scope": "real model, recorded synthetic DOM; no browser execution or Flow render",
+  "model": "cklxx/laya-browser",
+  "checkpoint": "v10",
+  "device": "cpu",
+  "load_s": 24.999762084102258,
+  "decision": {
+    "operation": "TYPE_TEXT",
+    "target": "0",
+    "snapshot": "fixture",
+    "laya_input_tokens": 352,
+    "inference_s": 0.5567884999327362,
+    "confidence": 0.9472
+  },
+  "passed": true
+}
