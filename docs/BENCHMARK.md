@@ -4,6 +4,8 @@
 
 ยังไม่มีคำตอบจากการทดลองครบชุด ห้ามกรอกตัวเลขคาดเดาลงเป็นผลจริง
 
+prompt ที่ตรึงก่อน baseline แรกอยู่ใน [examples/benchmark-prompts.json](../examples/benchmark-prompts.json) ใช้ข้อความสองช็อตนี้เหมือนกันทุกรอบ ผล JSON บันทึก hash ของเนื้อหา shots เพื่อให้ตรวจซ้ำได้
+
 ## การทดลอง
 
 1. ล็อก brief, prompt สองช็อต, ChatGPT model/effort, เครื่อง, Chrome, Flow model, resolution, aspect, duration, output count และบัญชีให้เหมือนกัน

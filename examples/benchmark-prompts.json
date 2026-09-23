@@ -1,0 +1,19 @@
+{
+  "protocol": "mug-v1",
+  "status": "frozen",
+  "brief": "examples/product.md",
+  "shots": [
+    {
+      "id": "shot-1",
+      "duration_s": 8,
+      "thai_dialogue": "มุมพักเล็ก ๆ กับแก้วใบโปรด",
+      "prompt": "An 8-second vertical 9:16 product video. A plain cream ceramic mug with a curved handle and no logo sits on a wooden table by a window in soft morning light. Slow camera push-in. One adult hand gently turns the mug. Keep the mug shape stable, realistic fingers, no text overlays or claims. A warm Thai female voice says exactly: มุมพักเล็ก ๆ กับแก้วใบโปรด. Quiet natural room ambience."
+    },
+    {
+      "id": "shot-2",
+      "duration_s": 8,
+      "thai_dialogue": "ชอบสไตล์นี้ ดูรายละเอียดสินค้าก่อนตัดสินใจได้เลย",
+      "prompt": "An 8-second vertical 9:16 product video. A plain cream ceramic mug with a smooth exterior, a curved handle and no logo sits on a wooden table by a window in soft morning light. Close-up with a slow sideways camera move. One adult hand gently holds the curved handle, then releases it while the mug stays on the table. Keep the cream mug's appearance and shape stable throughout, with realistic fingers. Match the visual description of the first shot: cream ceramic mug, wooden table, window and soft morning light. No text overlays, logos, prices, discounts or product claims. A warm Thai female voice says exactly: ชอบสไตล์นี้ ดูรายละเอียดสินค้าก่อนตัดสินใจได้เลย. Start the spoken line early and finish the complete sentence within the 8-second shot. Quiet natural room ambience."
+    }
+  ]
+}

@@ -101,5 +101,10 @@
     "height": 1280,
     "audio_stream_present": true,
     "full_audiovisual_qc": "pending_user_review"
+  },
+  "benchmark_inputs": {
+    "file": "examples/benchmark-prompts.json",
+    "shots_sha256": "4814b2eecc117d15ee459422c844ea2403108baf908164706d44d705219c7bcd",
+    "hash_method": "SHA-256 of UTF-8 JSON shots array with sorted keys, ensure_ascii=false and compact separators"
   }
 }
