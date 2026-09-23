@@ -103,7 +103,20 @@ def report_runs(paths):
         events = [json.loads(line) for line in (root / "events.jsonl").read_text().splitlines()]
         row = {
             k: cfg.get(k)
-            for k in ("arm", "brain", "pair", "status", "model_label", "protocol", "elapsed_s")
+            for k in (
+                "arm",
+                "brain",
+                "pair",
+                "status",
+                "model_label",
+                "protocol",
+                "elapsed_s",
+                "execution_status_at_finish",
+                "post_execution_qc",
+                "qc_received_at",
+                "qc_received_elapsed_s",
+                "qc_wait_s",
+            )
         }
         row["run"] = root.name
         row.update(transcript_metrics(root / "transcript.json"))
@@ -127,6 +140,9 @@ def report_runs(paths):
             "credit_reserved",
             "chatgpt_step",
             "laya_decision",
+            "native_setup",
+            "native_navigation",
+            "native_download_navigation",
         ):
             row[kind + "_count"] = sum(e["kind"] == kind for e in events)
         row["credits_reserved"] = sum(
@@ -152,7 +168,8 @@ def report_runs(paths):
             "Not actual OpenAI input/output, reasoning, cached or billed usage.",
             "Excludes hidden prompts, images, internal reasoning and context replay.",
             "Laya tokens use a different tokenizer and are reported separately.",
-            "Elapsed time includes human/tool pauses and cold model load; load is also itemized.",
+            "Elapsed is init through original execution finish, including pauses and cold model load. "
+            "Later human QC wait is reported separately when recorded.",
             "Only sanitized aggregates are exported; raw local logs remain private.",
         ],
         "runs": rows,

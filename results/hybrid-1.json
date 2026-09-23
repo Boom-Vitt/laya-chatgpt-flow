@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "tokenizer": "o200k_base",
+  "metric": "visible text counted once",
+  "limitations": [
+    "Not actual OpenAI input/output, reasoning, cached or billed usage.",
+    "Excludes hidden prompts, images, internal reasoning and context replay.",
+    "Laya tokens use a different tokenizer and are reported separately.",
+    "Elapsed is init through original execution finish, including pauses and cold model load. Later human QC wait is reported separately when recorded.",
+    "Only sanitized aggregates are exported; raw local logs remain private.",
+    "Only one pair is complete; this is descriptive evidence, not a savings or causal claim.",
+    "Both transcript captures remain complete:false; log completeness is unverified.",
+    "Baseline retained preparation context; hybrid used a fresh task. Context replay differs.",
+    "Baseline used CLI steps for navigation; hybrid used native browser setup/navigation/download-menu controls. Navigation overhead is not controlled.",
+    "Human QC was accepted after execution finish. Parent coordination and later QC bookkeeping are outside both execution/token windows."
+  ],
+  "runs": [
+    {
+      "arm": "hybrid",
+      "brain": "chatgpt-work-local",
+      "pair": 1,
+      "status": "passed",
+      "model_label": "6 Astra / xhigh (runtime metadata)",
+      "protocol": "mug-v1",
+      "elapsed_s": 484.674832083052,
+      "execution_status_at_finish": "blocked",
+      "post_execution_qc": true,
+      "qc_received_at": "2026-09-23T07:34:50.844+00:00",
+      "qc_received_elapsed_s": 641.752590083052,
+      "qc_wait_s": 157.077758,
+      "run": "hybrid-1",
+      "visible_input_tokens_est": 8379,
+      "visible_output_tokens_est": 7943,
+      "visible_total_tokens_est": 16322,
+      "comparable": false,
+      "transcript_source": "Local JSONL response items timestamped between run init and finish; user/assistant visible text and tool arguments/outputs only. Excludes system, developer, reasoning, images and event summaries. Log completeness is unverified.",
+      "laya_inference_s": 4.561829834012315,
+      "model_load_s": 50.12419787584804,
+      "flow_wait_s": 84.68749024905264,
+      "download_s": 1.0541157082188874,
+      "assembly_s": 1.7935695829801261,
+      "laya_input_tokens": 4928,
+      "needs_reasoning_count": 0,
+      "action_error_count": 0,
+      "model_error_count": 0,
+      "credit_reserved_count": 2,
+      "chatgpt_step_count": 0,
+      "laya_decision_count": 4,
+      "native_setup_count": 5,
+      "native_navigation_count": 2,
+      "native_download_navigation_count": 4,
+      "credits_reserved": 20
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "attempts": 0,
+      "passed": 0,
+      "elapsed_median_s": null,
+      "elapsed_min_s": null,
+      "elapsed_max_s": null
+    },
+    "hybrid": {
+      "attempts": 1,
+      "passed": 1,
+      "elapsed_median_s": 484.674832083052,
+      "elapsed_min_s": 484.674832083052,
+      "elapsed_max_s": 484.674832083052
+    }
+  },
+  "comparison": {
+    "token_reduction_pct": null,
+    "time_reduction_pct": null,
+    "reason": "requires exactly six registered attempts; do not drop failures or retries"
+  },
+  "supplemental_runtime_usage": {
+    "source": "Local token_usage_record.usage, deduplicated by response_id",
+    "response_count": 30,
+    "totals": {
+      "input_tokens": 2590355,
+      "cached_input_tokens": 2564736,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11148,
+      "reasoning_output_tokens": 2269,
+      "total_tokens": 2601503,
+      "uncached_input_tokens": 25619
+    },
+    "limitations": [
+      "Host-reported telemetry; not verified against a provider bill or usage API.",
+      "Records are selected by timestamp, not a provider request start/end interval.",
+      "Input includes context replay; cached input is a subset, not extra tokens.",
+      "Reasoning output is a subset of output; no reasoning content is exported.",
+      "Setup context can be replayed during the run and confound comparisons."
+    ]
+  },
+  "supplemental_runtime_window": {
+    "start": "2026-09-23T07:24:09.077262+00:00",
+    "end": "2026-09-23T07:32:13.766242+00:00",
+    "selection": "record timestamp, inclusive"
+  },
+  "execution_provenance": {
+    "ui_mode": "ChatGPT Desktop Work locally",
+    "ui_mode_source": "User-confirmed Work locally workflow; UI model picker not independently observed",
+    "runtime_model": "gpt-6-astra",
+    "runtime_reasoning_effort": "xhigh",
+    "model_source": "Local turn_context and thread_settings_applied records",
+    "backing_kind": "codex",
+    "baseline_has_preparation_context": false,
+    "task_origin": "Created with app task tool after explicit user request; same saved local project and requested model/effort"
+  },
+  "artifact": {
+    "duration_s": 16.0,
+    "width": 720,
+    "height": 1280,
+    "audio_stream_present": true,
+    "full_audiovisual_qc": "passed_user_review",
+    "qc_review_source": "User accepted complete 16-second playback, mug/hand proportions, continuity and Thai dialogue",
+    "final_sha256": "c3e473c7fdf9c7b60c0937c6041bb6e5d77935047b6fbd650a4bec8391fdafd4"
+  },
+  "benchmark_inputs": {
+    "file": "examples/benchmark-prompts.json",
+    "shots_sha256": "4814b2eecc117d15ee459422c844ea2403108baf908164706d44d705219c7bcd",
+    "hash_method": "SHA-256 of UTF-8 JSON shots array with sorted keys, ensure_ascii=false and compact separators"
+  },
+  "post_execution_qc": {
+    "execution_status_at_finish": "blocked",
+    "qc_received_at": "2026-09-23T07:34:50.844+00:00",
+    "qc_received_elapsed_s": 641.752590083052,
+    "qc_wait_s": 157.077758,
+    "execution_elapsed_s": 484.674832083052,
+    "timing_note": "Original execution elapsed and finish event preserved; post-execution human review wait is separate.",
+    "receipt_timing_source": "Original monotonic execution elapsed plus UTC difference between original finish event and explicit user reply timestamp"
+  },
+  "execution_details": {
+    "ready_for_review_elapsed_s": 373.2887652500067,
+    "after_ready_until_finish_s": 111.38606683304533,
+    "laya": {
+      "delegations": 2,
+      "decisions": 4,
+      "model_load_s": 50.12419787584804,
+      "inference_s": 4.561829834012315,
+      "input_tokens_own_tokenizer": 4928,
+      "delegations_per_shot": {
+        "shot-1": 1,
+        "shot-2": 1
+      },
+      "checkpoint": "v10",
+      "device": "cpu"
+    },
+    "paid_retries": 0,
+    "ui_warning_count": 1,
+    "ui_warning": "After second submission UI displayed credit exhaustion/Not enough credits while accepted render progressed. Both shots subsequently downloaded. No further submission.",
+    "native_browser_event_counts": {
+      "native_setup": 5,
+      "native_navigation": 2,
+      "native_download_navigation": 4
+    },
+    "native_browser_note": "Read/settings/account and deterministic download navigation performed by ChatGPT with visible controls and recorded events. Laya selected fill and submit for both shots. No native generation click.",
+    "setup_model_check_passed": false,
+    "laya_calibration_warning": "Checkpoint temperature clamp warning retained in delegation stderr; confidence not used to claim quality.",
+    "setup_note": "Pre-init model check excluded from elapsed; two cold model loads during the measured run are included. Ready-for-review is a supplemental marker, not the comparison boundary."
+  },
+  "flow_credits": {
+    "before": 20,
+    "between_shots": 10,
+    "after": 0,
+    "used_this_run": 20,
+    "shared_ledger_cap": 130,
+    "shared_reserved_after": 50
+  }
+}

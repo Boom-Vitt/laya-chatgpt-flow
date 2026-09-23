@@ -24,6 +24,8 @@ prompt ที่ตรึงก่อน baseline แรกอยู่ใน [e
 - นี่ไม่ใช่ server latency ของ ChatGPT และไม่ใช่เวลานับจากผู้ใช้กดส่งข้อความ หากต้องการค่านั้นให้จับเพิ่มจากวิดีโอหน้าจอพร้อมขอบเขตเวลาชัดเจน
 - รายงาน median, min, max และจำนวน attempts/successes ของทั้งสองแขน พร้อมเวลา Laya, model load, Flow wait, download, assembly ที่สังเกตได้
 - ห้ามลบเวลาที่ Laya ผิดหรือ ChatGPT ต้องรับช่วงเพียงเพื่อให้ผลดูดี
+- ถ้าปิด execution เพื่อรอคนดู/ฟัง ให้รักษา finish event และ `elapsed_s` เดิม แล้วบันทึกผลตรวจภายหลังพร้อม hash ของคลิปและ `qc_accepted` event แยกไว้ เมื่อผู้ใช้ยืนยันผ่านจึงปรับสถานะผล โดยเก็บ `execution_status_at_finish`, `qc_received_elapsed_s` และ `qc_wait_s` ไว้ครบ เวลารอหลัง execution ไม่ใช่เวลาที่ agent กำลังสร้างคลิป ห้ามนำไปปนกับช่วงนับ token เดิม
+- `chatgpt_step_count` นับเฉพาะ CLI step; การกดผ่าน native browser ต้องบันทึก `native_setup` / `native_navigation` / `native_download_navigation` ด้วย เพื่อไม่ให้รายงานดูเหมือน ChatGPT ไม่ได้ลงมือ และต้องเปิดเผยเมื่อสองแขนใช้ช่องทาง navigation ต่างกัน
 
 ## Token
 
