@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "tokenizer": "o200k_base",
+  "metric": "visible text counted once",
+  "limitations": [
+    "Not actual OpenAI input/output, reasoning, cached or billed usage.",
+    "Excludes hidden prompts, images, internal reasoning and context replay.",
+    "Laya tokens use a different tokenizer and are reported separately.",
+    "Elapsed time includes human/tool pauses and cold model load; load is also itemized.",
+    "Only sanitized aggregates are exported; raw local logs remain private.",
+    "This first baseline retained preparation context; host input totals include replay of that context."
+  ],
+  "runs": [
+    {
+      "arm": "baseline",
+      "brain": "chatgpt-work-local",
+      "pair": 1,
+      "status": "blocked",
+      "model_label": "6 Astra / xhigh (runtime metadata)",
+      "protocol": "mug-v1",
+      "elapsed_s": 616.7677483749576,
+      "run": "baseline-1",
+      "visible_input_tokens_est": 16872,
+      "visible_output_tokens_est": 9325,
+      "visible_total_tokens_est": 26197,
+      "comparable": false,
+      "transcript_source": "Local JSONL response items timestamped between run init and finish; user/assistant visible text and tool arguments/outputs only. Excludes system, developer, reasoning, images and event summaries. Log completeness is unverified.",
+      "laya_inference_s": null,
+      "model_load_s": null,
+      "flow_wait_s": 64.4271953329444,
+      "download_s": 0.30872241710312665,
+      "assembly_s": 2.5383560420013964,
+      "laya_input_tokens": null,
+      "needs_reasoning_count": 0,
+      "action_error_count": 0,
+      "model_error_count": 0,
+      "credit_reserved_count": 2,
+      "chatgpt_step_count": 19,
+      "laya_decision_count": 0,
+      "credits_reserved": 20
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "attempts": 1,
+      "passed": 0,
+      "elapsed_median_s": 616.7677483749576,
+      "elapsed_min_s": 616.7677483749576,
+      "elapsed_max_s": 616.7677483749576
+    },
+    "hybrid": {
+      "attempts": 0,
+      "passed": 0,
+      "elapsed_median_s": null,
+      "elapsed_min_s": null,
+      "elapsed_max_s": null
+    }
+  },
+  "comparison": {
+    "token_reduction_pct": null,
+    "time_reduction_pct": null,
+    "reason": "requires exactly six registered attempts; do not drop failures or retries"
+  },
+  "supplemental_runtime_usage": {
+    "source": "Local token_usage_record.usage, deduplicated by response_id",
+    "response_count": 35,
+    "totals": {
+      "input_tokens": 4884089,
+      "cached_input_tokens": 4844544,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 13866,
+      "reasoning_output_tokens": 4193,
+      "total_tokens": 4897955,
+      "uncached_input_tokens": 39545
+    },
+    "limitations": [
+      "Host-reported telemetry; not verified against a provider bill or usage API.",
+      "Records are selected by timestamp, not a provider request start/end interval.",
+      "Input includes context replay; cached input is a subset, not extra tokens.",
+      "Reasoning output is a subset of output; no reasoning content is exported.",
+      "Setup context can be replayed during the run and confound comparisons."
+    ]
+  },
+  "supplemental_runtime_window": {
+    "start": "2026-09-23T06:53:23.880382+00:00",
+    "end": "2026-09-23T07:03:40.687470+00:00",
+    "selection": "record timestamp, inclusive"
+  },
+  "execution_provenance": {
+    "ui_mode": "ChatGPT Desktop Work locally",
+    "ui_mode_source": "user confirmation",
+    "runtime_model": "gpt-6-astra",
+    "runtime_reasoning_effort": "xhigh",
+    "model_source": "local turn_context and thread_settings_applied records before init",
+    "backing_kind": "codex",
+    "baseline_has_preparation_context": true
+  },
+  "artifact": {
+    "duration_s": 16.0,
+    "width": 720,
+    "height": 1280,
+    "audio_stream_present": true,
+    "full_audiovisual_qc": "pending_user_review"
+  }
+}

@@ -37,6 +37,20 @@ ChatGPT Work ไม่เปิด usage API ให้ repo นี้ จึง�
 
 ตั้ง `complete:true` เฉพาะเมื่อมีข้อความและ tool payload ที่มองเห็นครบในช่วงที่กำหนด หาก export มีเพียง summary/ขาด tool messages ให้เก็บ `complete:false` ตัวเลขยังดูได้ แต่จะไม่เข้าเปอร์เซ็นต์เปรียบเทียบ หากไม่มีไฟล์ ค่า token เป็น `null` ไม่ใช่ศูนย์
 
+### สถิติจาก local log เมื่อมีให้ใช้
+
+บาง Desktop runtime มีไฟล์ JSONL ที่บันทึก `response_item` และ `token_usage_record` ใช้ตัวอ่านเสริมหลัง `finish` ได้ โดยไม่เรียก API:
+
+```bash
+uv run python capture_rollout.py /path/to/local-rollout.jsonl runs/baseline-1
+```
+
+ได้ `RUN/rollout-capture.json` ซึ่งมี `transcript` และ `runtime_usage` แยกกัน ตัวอ่านไม่เขียนทับหลักฐานเดิมและตั้ง `complete:false` เพราะการมี log ไม่พิสูจน์ว่า capture ครบ เลือกเฉพาะ record ที่ timestamp อยู่ในช่วง `init` ถึง `finish`; ไม่ส่งออกข้อความ system/developer, reasoning content หรือ image/audio blocks เก็บไฟล์นี้ไว้เฉพาะใน `runs/` เพราะข้อความที่มองเห็นก็อาจมีข้อมูลบัญชีได้
+
+`runtime_usage` เป็นสถิติที่ host บันทึกต่อ response โดยตัด response ID ซ้ำ ไม่ใช่ยอดเรียกเก็บที่ยืนยันกับผู้ให้บริการ: input รวมการส่งบริบทซ้ำ, cached input เป็นส่วนหนึ่งของ input และ reasoning output เป็นส่วนหนึ่งของ output ห้ามบวกซ้ำ ถ้าไม่มี record ให้ใช้ `null` ช่วงเวลาของ record ไม่เท่ากับช่วงเริ่ม/จบ request ของผู้ให้บริการ จึงรายงานแยกจาก visible-text estimates และห้ามนำสองมาตรวัดมาเทียบกันตรง ๆ
+
+บริบทจากช่วงเตรียมอาจถูกส่งซ้ำในช่วงวัด จึงต้องรายงานผลกระทบนี้ด้วย โดยเฉพาะรอบแรกที่เตรียมงานใน task เดียวกัน ชื่อ backing kind ภายในอย่าง `codex` เพียงอย่างเดียวไม่พิสูจน์โหมด UI ให้เก็บคำยืนยัน Work locally ของผู้ใช้และ model/effort จาก runtime metadata แยกกัน ห้ามเปลี่ยน label ของ development pilot ย้อนหลัง
+
 ```bash
 uv run python flow.py report \
   runs/baseline-1 runs/hybrid-1 runs/hybrid-2 \
