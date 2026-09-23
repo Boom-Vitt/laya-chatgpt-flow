@@ -1,6 +1,7 @@
 """Local workflow boundaries, spending ledger and CLI. No hosted model calls."""
 
 import argparse
+import errno
 import json
 import os
 import re
@@ -9,24 +10,24 @@ import sqlite3
 import subprocess
 import sys
 import time
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
 
 def read_json(path):
-    return json.loads(Path(path).read_text())
+    return json.loads(Path(path).read_text(encoding="utf-8-sig"))
 
 
 def write_json(path, data):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def event(run, kind, **data):
-    with (Path(run) / "events.jsonl").open("a") as stream:
+    with (Path(run) / "events.jsonl").open("a", encoding="utf-8") as stream:
         stream.write(
             json.dumps(
                 {
@@ -49,7 +50,7 @@ def reserve_credit(path, cap, key, cost):
         raise ValueError("credits must be positive integers within the cap")
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    with sqlite3.connect(path) as db:
+    with closing(sqlite3.connect(path)) as db, db:
         db.execute("CREATE TABLE IF NOT EXISTS budget (cap INTEGER NOT NULL)")
         db.execute("CREATE TABLE IF NOT EXISTS spend (id TEXT PRIMARY KEY, credits INTEGER)")
         db.execute("BEGIN IMMEDIATE")
@@ -154,14 +155,35 @@ def project_url(url):
 
 @contextmanager
 def run_lock(run):
-    import fcntl
+    with (Path(run) / ".lock").open("a+b") as lock:
+        if sys.platform == "win32":
+            import msvcrt
 
-    with (Path(run) / ".lock").open("w") as lock:
+            def acquire():
+                msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+
+            def release():
+                msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            def acquire():
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+            def release():
+                fcntl.flock(lock, fcntl.LOCK_UN)
+
+        lock.seek(0)
         try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
-            raise ValueError("another command is operating this run") from None
-        yield
+            acquire()
+        except OSError as error:
+            if error.errno in (errno.EACCES, errno.EAGAIN, errno.EDEADLK):
+                raise ValueError("another command is operating this run") from None
+            raise
+        try:
+            yield
+        finally:
+            release()
 
 
 def init_run(args):
@@ -195,7 +217,7 @@ def probe(path):
         ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)],
         check=True,
         capture_output=True,
-        text=True,
+        encoding="utf-8",
     )
     data = json.loads(result.stdout)
     video = next(s for s in data["streams"] if s["codec_type"] == "video")
@@ -305,6 +327,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor")
+    browser = sub.add_parser("open-browser", help="open isolated Chrome on this operating system")
+    browser.add_argument("--chrome", help="override the detected Chrome executable")
+    browser.add_argument("--port", type=int, default=9223)
     m = sub.add_parser("model-check")
     m.add_argument("--device", choices=["cpu", "mps", "cuda"], default="cpu")
     m.add_argument("--output", default="runs/model-check.json")
@@ -358,9 +383,16 @@ def main():
         import importlib.metadata
         import platform
 
+        from chrome_launcher import find_chrome
+
+        try:
+            chrome = find_chrome()
+        except FileNotFoundError:
+            chrome = None
         result = {
             "python": sys.version.split()[0],
             "platform": platform.platform(),
+            "chrome": chrome,
             "ffmpeg": bool(shutil.which("ffmpeg")),
             "ffprobe": bool(shutil.which("ffprobe")),
             "packages": {
@@ -368,6 +400,10 @@ def main():
                 for n in ["laya", "torch", "transformers", "playwright", "tiktoken"]
             },
         }
+    elif args.command == "open-browser":
+        from chrome_launcher import open_browser
+
+        result = open_browser(args.chrome, args.port)
     elif args.command == "init":
         result = init_run(args)
     elif args.command == "model-check":
@@ -394,6 +430,8 @@ def main():
 
 
 if __name__ == "__main__":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     try:
         main()
     except (ValueError, OSError, subprocess.CalledProcessError) as error:

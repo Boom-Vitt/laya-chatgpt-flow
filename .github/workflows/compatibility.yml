@@ -1,0 +1,43 @@
+name: Windows Linux macOS
+
+on:
+  push:
+    paths-ignore: ['**.md', 'assets/**', 'results/**']
+  pull_request:
+    paths-ignore: ['**.md', 'assets/**', 'results/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-runner:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      RUN_BROWSER_CHECKS: '1'
+      RUN_MEDIA_CHECKS: '1'
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          enable-cache: false
+      - run: uv sync --locked
+      - name: Install FFmpeg on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install FFmpeg on macOS
+        if: runner.os == 'macOS'
+        run: command -v ffmpeg || brew install ffmpeg
+      - name: Install FFmpeg on Windows
+        if: runner.os == 'Windows'
+        run: choco install ffmpeg -y --no-progress
+      - run: uv run python flow.py doctor
+      - run: uv run python -c "import torch, laya; assert torch.ones(2).sum().item() == 2; print('Laya and CPU tensor runtime ready')"
+      - run: uv run python -m unittest discover -s tests -v
+      - run: uv run ruff check .

@@ -7,11 +7,21 @@ dependencies = [
   "laya==0.3.6",
   "playwright>=1.55,<2",
   "tiktoken>=0.12,<1",
+  "torch==2.14.0",
   "transformers>=4.48,<5",
 ]
 
 [dependency-groups]
 dev = ["ruff>=0.13,<1"]
+
+# CPU is the portable default; avoid downloading CUDA libraries on Linux.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [tool.ruff]
 line-length = 100

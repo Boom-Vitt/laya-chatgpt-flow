@@ -2,22 +2,64 @@
 
 import json
 import os
+import socket
+import subprocess
 import tempfile
+import time
 import unittest
 from pathlib import Path
+from urllib.error import URLError
+from urllib.request import urlopen
 
 from browser_worker import Browser
+from chrome_launcher import chrome_command, find_chrome
 
 
 @unittest.skipUnless(os.environ.get("RUN_BROWSER_CHECKS") == "1", "opt-in real browser check")
 class BrowserCheck(unittest.TestCase):
+    def test_launcher_arguments_start_a_real_loopback_cdp_browser(self):
+        from playwright.sync_api import sync_playwright
+
+        with tempfile.TemporaryDirectory() as folder, socket.socket() as port_socket:
+            port_socket.bind(("127.0.0.1", 0))
+            port = port_socket.getsockname()[1]
+            port_socket.close()
+            profile = Path(folder) / "Chrome โปรไฟล์ทดสอบ"
+            command = chrome_command(find_chrome(), profile, port)
+            # A blank headless page keeps this check independent of Google and user accounts.
+            command[-1:] = ["--headless=new", "about:blank"]
+            process = subprocess.Popen(
+                command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+            try:
+                endpoint = f"http://127.0.0.1:{port}"
+                deadline = time.monotonic() + 15
+                while True:
+                    try:
+                        with urlopen(endpoint + "/json/version", timeout=1) as response:
+                            self.assertIn("webSocketDebuggerUrl", json.load(response))
+                        break
+                    except (URLError, OSError):
+                        if time.monotonic() >= deadline or process.poll() is not None:
+                            self.fail("Chrome did not expose its loopback DevTools endpoint")
+                        time.sleep(0.1)
+                with sync_playwright() as pw:
+                    browser = pw.chromium.connect_over_cdp(endpoint)
+                    page = browser.contexts[0].new_page()
+                    page.set_content("<h1>พร้อมใช้งาน</h1>")
+                    self.assertEqual(page.locator("h1").inner_text(), "พร้อมใช้งาน")
+                    browser.new_browser_cdp_session().send("Browser.close")
+                process.wait(timeout=10)
+            finally:
+                if process.poll() is None:
+                    process.kill()
+                    process.wait(timeout=10)
+
     def test_fill_then_submit_uses_real_dom_and_reserves_once(self):
         from playwright.sync_api import sync_playwright
 
         with tempfile.TemporaryDirectory() as folder, sync_playwright() as pw:
-            chrome = os.environ.get(
-                "CHROME_BIN", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-            )
+            chrome = find_chrome()
             native = pw.chromium.launch(executable_path=chrome, headless=True)
             page = native.new_page()
             url = "https://flow.google.com/project/local-fixture"
@@ -74,7 +116,10 @@ class BrowserCheck(unittest.TestCase):
                     run,
                     cfg,
                 )
-            events = [json.loads(line) for line in (run / "events.jsonl").read_text().splitlines()]
+            events = [
+                json.loads(line)
+                for line in (run / "events.jsonl").read_text(encoding="utf-8").splitlines()
+            ]
             self.assertEqual(sum(e["kind"] == "action_error" for e in events), 1)
             native.close()
 

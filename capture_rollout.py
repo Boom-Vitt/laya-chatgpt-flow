@@ -133,11 +133,14 @@ def main():
     if output.exists():
         parser.error("rollout-capture.json already exists; preserve earlier evidence")
     run = read_json(args.run / "run.json")
-    events = [json.loads(line) for line in (args.run / "events.jsonl").read_text().splitlines()]
+    events = [
+        json.loads(line)
+        for line in (args.run / "events.jsonl").read_text(encoding="utf-8").splitlines()
+    ]
     finishes = [event["at"] for event in events if event.get("kind") == "finish"]
     if not finishes:
         parser.error("finish the run before capturing")
-    with args.rollout.open() as stream:
+    with args.rollout.open(encoding="utf-8-sig") as stream:
         result = capture((json.loads(line) for line in stream), run["started_at"], finishes[-1])
     write_json(output, result)
     print(json.dumps({"output": str(output), "runtime_usage": result["runtime_usage"]}))

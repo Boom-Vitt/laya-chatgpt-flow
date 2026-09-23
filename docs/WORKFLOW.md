@@ -1,11 +1,13 @@
 # ใช้จาก ChatGPT Work locally
 
-เปิด repo นี้เป็น working folder ให้ ChatGPT อ่าน Skill ก่อนทำงาน การใช้ ChatGPT หน้าเว็บหรือ Work in cloud ไม่ทำให้เรียกไฟล์/Chrome บน Mac นี้ได้เอง งานพัฒนาที่รันจาก Codex ต้องระบุ `--brain codex-development` และจะไม่ถูกรวมในผลเทียบ
+เปิด repo นี้เป็น working folder ให้ ChatGPT อ่าน Skill ก่อนทำงาน การใช้ ChatGPT หน้าเว็บหรือ Work in cloud ไม่ทำให้เรียกไฟล์/Chrome บนเครื่องนี้ได้เอง งานพัฒนาที่รันจาก Codex ต้องระบุ `--brain codex-development` และจะไม่ถูกรวมในผลเทียบ
+
+ติดตั้งเครื่องมือก่อนตาม [คู่มือ Windows / Linux / macOS](INSTALL.md) คำสั่งด้านล่างใช้ได้ทั้ง PowerShell และ Terminal; ตัวอย่าง JSON ให้บันทึกเป็น UTF-8
 
 ## 1. เปิด Chrome และตรวจ Flow
 
 ```bash
-sh scripts/open-chrome-mac.sh
+uv run python flow.py open-browser
 ```
 
 ล็อกอิน Google ด้วยตัวเอง เปิด/สร้างโปรเจกต์ Flow ใหม่ แล้วคัด URL จริง อย่าใช้ URL ตัวอย่างด้านล่างตรง ๆ อย่าย้าย cookies จาก Chrome ประจำวัน
@@ -13,14 +15,13 @@ sh scripts/open-chrome-mac.sh
 ตรวจใน UI: Agent ปิด, Video/Frames, Veo 3.1 Lite, 9:16, 720p, 8s, x1 และเครดิตที่แสดง การตั้งค่าไม่ถูกต้องอาจใช้เครดิตมากกว่าที่บันทึก ระบบอาศัยการตรวจ UI โดย ChatGPT/ผู้ใช้ก่อนส่งงาน
 
 ```bash
-uv run python flow.py init runs/hybrid-1 \
-  --url 'https://flow.google.com/project/REAL-PROJECT-ID' \
-  --arm hybrid --brain chatgpt-work-local --model-label 'EXACT MODEL AND EFFORT' \
-  --pair 1 --cap 120 --budget runs/benchmark-budget.sqlite
+uv run python flow.py init runs/hybrid-1 --url 'https://flow.google.com/project/REAL-PROJECT-ID' --arm hybrid --brain chatgpt-work-local --model-label 'EXACT MODEL AND EFFORT' --pair 1 --cap 20 --budget runs/my-budget.sqlite
 uv run python flow.py observe runs/hybrid-1
 ```
 
 หากโปรเจกต์ยังไม่เปิดในหน้าต่างทดสอบ ใช้ `uv run python flow.py open-project runs/hybrid-1` เพื่อเปิด URL ที่ระบุไว้อย่างเจาะจง โปรแกรมจะไม่สร้างโปรเจกต์ใหม่หรือจัดการล็อกอินให้เอง
+
+ตั้ง `--cap` ตามเครดิตที่ผู้ใช้อนุญาตจริง; ตัวอย่าง 20 เครดิตเป็นเพดานหนึ่งคลิป ไม่ใช่ราคาที่รับประกัน ใช้ชื่อรอบใหม่เพื่อไม่ชนกับหลักฐานที่มีอยู่
 
 ใช้ `--arm baseline` สำหรับ ChatGPT ตัดสินใจเอง; `--arm pilot` สำหรับทดสอบการเชื่อม การเริ่ม run เดิมซ้ำจะไม่เขียนทับหลักฐาน ทุก run ในการเปรียบเทียบต้องใช้ไฟล์ budget เดียวกัน
 

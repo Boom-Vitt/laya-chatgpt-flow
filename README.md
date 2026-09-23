@@ -13,7 +13,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d2dfcf?style=flat-square&labelColor=263640" alt="Code license: MIT"></a>
   <a href="https://huggingface.co/cklxx/laya-browser"><img src="https://img.shields.io/badge/Laya-v10_%C2%B7_421M-b6ed91?style=flat-square&labelColor=263640" alt="Laya v10, 421M parameters"></a>
   <a href="#results"><img src="https://img.shields.io/badge/Demo-1_pair_%C2%B7_reviewed-ffaf80?style=flat-square&labelColor=263640" alt="One demonstration pair, reviewed"></a>
-  <a href="#quickstart"><img src="https://img.shields.io/badge/Local-macOS_%C2%B7_CPU-b0d6ec?style=flat-square&labelColor=263640" alt="Tested locally on macOS with CPU inference"></a>
+  <a href="#quickstart"><img src="https://img.shields.io/badge/Local-Windows_%C2%B7_Linux_%C2%B7_macOS-b0d6ec?style=flat-square&labelColor=263640" alt="Local runner for Windows, Linux and macOS"></a>
+  <a href="https://github.com/Boom-Vitt/laya-chatgpt-flow/actions/workflows/compatibility.yml"><img src="https://github.com/Boom-Vitt/laya-chatgpt-flow/actions/workflows/compatibility.yml/badge.svg" alt="Windows Linux macOS checks"></a>
 </p>
 
 <p align="center">
@@ -124,18 +125,20 @@ Laya เลือกกรอกและกดส่ง prompt ผ่าน 2 d
 Laya เป็นโมเดลเลือกการกระทำ จึงต้องให้ ChatGPT เตรียมข้อความที่จะกรอกไว้ เมื่อทำต่อไม่ได้จะส่ง `needs_reasoning` กลับมา Repo นี้ใช้ ChatGPT Work เป็นตัวคิด ส่วนรอบพัฒนาที่ทำใน Codex แยกเป็น pilot และไม่นับปนในตาราง
 
 <a id="quickstart"></a>
-## เริ่มใช้บน Mac
+## เริ่มใช้บน Windows · Linux · macOS
 
-ต้องมี **ChatGPT Desktop ที่ใช้ Work locally และคำสั่งในเครื่องได้**, Chrome, บัญชี Flow/เครดิต, [uv](https://docs.astral.sh/uv/getting-started/installation/) และ FFmpeg ทดสอบด้วย CPU บน Apple Silicon / RAM 16 GB
+เลือก [คู่มือติดตั้งตามระบบของคุณ](docs/INSTALL.md): **Windows x64**, **Linux x64 แบบ Desktop** หรือ **macOS Apple Silicon** ต้องมี ChatGPT Desktop ที่ใช้ Work locally และคำสั่งในเครื่องได้, Chrome, บัญชี Flow/เครดิต, uv และ FFmpeg ใช้ CPU ได้ ไม่ต้องมีการ์ดจอแยก
 
-**1. เตรียมตัวรัน**
+ตรวจสถานะการทดสอบตัวรันทั้งสามระบบได้จาก badge ด้านบน ส่วนคลิปและตัวเลข benchmark ชุดนี้วัดบน Mac เท่านั้น [ขอบเขตที่ตรวจแล้วและเครื่องที่ยังไม่รองรับ](docs/INSTALL.md#ระบบและขอบเขตการตรวจ)
 
-```bash
+**1. เตรียมตัวรัน** — คำสั่งเดียวกันใน PowerShell หรือ Terminal
+
+```text
 git clone https://github.com/Boom-Vitt/laya-chatgpt-flow.git
 cd laya-chatgpt-flow
 uv sync --locked
 uv run python flow.py doctor
-sh scripts/open-chrome-mac.sh
+uv run python flow.py open-browser
 ```
 
 **2. ล็อกอิน Flow** ใน Chrome หน้าต่างทดสอบ แล้วเปิดโปรเจกต์ที่จะใช้ โปรไฟล์นี้แยกจาก Chrome ประจำวัน
@@ -152,7 +155,7 @@ sh scripts/open-chrome-mac.sh
 
 **4. ตรวจคลิปก่อนใช้** ดูสัดส่วนสินค้า มือ ความต่อเนื่อง และฟังบทพูดไทยให้ครบ ไฟล์จะอยู่ใน `runs/<ชื่อรอบ>/final.mp4`
 
-[คู่มือคำสั่งทีละขั้น](docs/WORKFLOW.md) · [Skill ที่ใช้](.agents/skills/laya-chatgpt-flow/SKILL.md) · [brief ตัวอย่าง](examples/product.md)
+[ติดตั้ง Windows / Linux / macOS](docs/INSTALL.md) · [คู่มือคำสั่งทีละขั้น](docs/WORKFLOW.md) · [Skill ที่ใช้](.agents/skills/laya-chatgpt-flow/SKILL.md) · [brief ตัวอย่าง](examples/product.md)
 
 ## ฟรีส่วนไหน และมีข้อจำกัดอะไร
 
@@ -166,14 +169,13 @@ sh scripts/open-chrome-mac.sh
 <details>
 <summary><strong>สำหรับผู้พัฒนา: ตรวจตัวรันโดยไม่ใช้เครดิต</strong></summary>
 
-```bash
+```text
 uv run python -m unittest discover -s tests -v
-RUN_BROWSER_CHECKS=1 RUN_MEDIA_CHECKS=1 uv run python -m unittest discover -s tests -v
 uv run ruff check .
 uv run python flow.py model-check
 ```
 
-Browser check ใช้ Chrome ใหม่กับ HTML ในเครื่อง ส่วน media check ใช้สัญญาณภาพ/เสียงทดสอบ ไม่สร้างงานบน Flow จริง `model-check` โหลด Laya และรายงานการเลือกผิดตามจริง ดู [ผลทดสอบรวมถึงกรณีที่ไม่ผ่าน](results/README.md)
+ตั้งค่า browser/media checks ตาม [shell ของคุณ](docs/INSTALL.md#ตรวจในเครื่องโดยไม่ใช้เครดิต-flow) หรือดู GitHub Actions ทั้งสามระบบ Browser check ใช้ Chrome ใหม่กับ HTML ในเครื่อง ส่วน media check ใช้สัญญาณภาพ/เสียงทดสอบ ไม่สร้างงานบน Flow จริง `model-check` โหลด Laya และรายงานการเลือกผิดตามจริง ดู [ผลทดสอบรวมถึงกรณีที่ไม่ผ่าน](results/README.md)
 
 </details>
 

@@ -13,7 +13,8 @@ from flow import assemble
 class MediaCheck(unittest.TestCase):
     def test_two_audio_shots_join_to_sixteen_seconds_without_overwrite(self):
         with tempfile.TemporaryDirectory() as folder:
-            root = Path(folder)
+            root = Path(folder) / "คลิป ทดสอบ"
+            root.mkdir()
             shots = []
             for index, color in enumerate(("red", "blue")):
                 path = root / f"shot-{index}.mp4"

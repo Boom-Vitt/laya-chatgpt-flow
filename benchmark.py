@@ -100,7 +100,10 @@ def report_runs(paths):
     for path in paths:
         root = Path(path)
         cfg = read_json(root / "run.json")
-        events = [json.loads(line) for line in (root / "events.jsonl").read_text().splitlines()]
+        events = [
+            json.loads(line)
+            for line in (root / "events.jsonl").read_text(encoding="utf-8").splitlines()
+        ]
         row = {
             k: cfg.get(k)
             for k in (
