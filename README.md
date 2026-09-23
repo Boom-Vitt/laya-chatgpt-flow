@@ -129,7 +129,7 @@ Laya เป็นโมเดลเลือกการกระทำ จึ�
 
 เลือก [คู่มือติดตั้งตามระบบของคุณ](docs/INSTALL.md): **Windows x64**, **Linux x64 แบบ Desktop** หรือ **macOS Apple Silicon** ต้องมี ChatGPT Desktop ที่ใช้ Work locally และคำสั่งในเครื่องได้, Chrome, บัญชี Flow/เครดิต, uv และ FFmpeg ใช้ CPU ได้ ไม่ต้องมีการ์ดจอแยก
 
-ตรวจสถานะการทดสอบตัวรันทั้งสามระบบได้จาก badge ด้านบน ส่วนคลิปและตัวเลข benchmark ชุดนี้วัดบน Mac เท่านั้น [ขอบเขตที่ตรวจแล้วและเครื่องที่ยังไม่รองรับ](docs/INSTALL.md#ระบบและขอบเขตการตรวจ)
+**ตัวรันผ่าน 16/16 tests บนทั้งสามระบบ** — [หลักฐาน GitHub Actions](https://github.com/Boom-Vitt/laya-chatgpt-flow/actions/runs/35836636112) ส่วนคลิปและตัวเลข benchmark ชุดนี้วัดบน Mac เท่านั้น [ขอบเขตที่ตรวจแล้วและเครื่องที่ยังไม่รองรับ](docs/INSTALL.md#ระบบและขอบเขตการตรวจ)
 
 **1. เตรียมตัวรัน** — คำสั่งเดียวกันใน PowerShell หรือ Terminal
 

@@ -6,11 +6,11 @@
 
 | เครื่อง | แนวทางติดตั้ง | การตรวจตัวรัน |
 |:---|:---|:---|
-| Windows x64 | PowerShell บน Windows โดยตรง | GitHub Actions: Windows Server 2025 x64 |
-| Linux x64 แบบ Desktop | เริ่มจาก Ubuntu 24.04 LTS | GitHub Actions: Ubuntu 24.04 x64 |
-| macOS Apple Silicon | Terminal | GitHub Actions: macOS 15 ARM64 และเครื่องพัฒนา macOS 26.4 |
+| Windows x64 | PowerShell บน Windows โดยตรง | ผ่าน 16/16 — Windows Server 2025 x64 |
+| Linux x64 แบบ Desktop | เริ่มจาก Ubuntu 24.04 LTS | ผ่าน 16/16 — Ubuntu 24.04 x64 |
+| macOS Apple Silicon | Terminal | ผ่าน 16/16 — macOS 15 ARM64 และเครื่องพัฒนา macOS 26.4 |
 
-ดูสถานะจริงใน [การทดสอบทั้งสามระบบ](https://github.com/Boom-Vitt/laya-chatgpt-flow/actions/workflows/compatibility.yml) ซึ่งตรวจการติดตั้งจาก lockfile, import Laya/PyTorch, คำนวณ CPU, เปิด Chrome/เชื่อม CDP, ไฟล์ภาษาไทย, ล็อกข้าม process, บัญชีเครดิต และต่อคลิปด้วย FFmpeg โดยไม่ใช้บัญชีหรือเครดิต Flow
+ผลข้างต้นจาก [GitHub Actions วันที่ 23 กันยายน 2026](https://github.com/Boom-Vitt/laya-chatgpt-flow/actions/runs/35836636112) ที่ commit `8c90dda` ผ่านทั้งสามระบบ รวม lint ตรวจการติดตั้งจาก lockfile, import Laya/PyTorch, คำนวณ CPU, เปิด Chrome/เชื่อม CDP, ไฟล์ภาษาไทย, ล็อกข้าม process, บัญชีเครดิต และต่อคลิปด้วย FFmpeg โดยไม่ใช้บัญชีหรือเครดิต Flow ดู [สถานะรอบล่าสุด](https://github.com/Boom-Vitt/laya-chatgpt-flow/actions/workflows/compatibility.yml) เมื่อโค้ดเปลี่ยน
 
 **คลิป Flow จริงและ benchmark ใน README มาจาก Mac Apple Silicon เท่านั้น** CI ไม่ได้ล็อกอิน ChatGPT/Google, โหลด checkpoint เพื่อวัดความแม่นยำ หรือสร้างคลิปจริงบน Windows/Linux จึงยังไม่มีผลความเร็วหรือ QC ของ Flow บนสองระบบนั้น
 
