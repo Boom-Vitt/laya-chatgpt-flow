@@ -1,5 +1,16 @@
+<!-- BBN:HEADER:START -->
+<div align="center">
+
+<img src=".github/brand/banner.svg" width="100%" alt="Laya + ChatGPT → Flow — ChatGPT plans, local Laya 421M acts, Google Flow renders" />
+
+<a href="https://github.com/Boom-Vitt/laya-chatgpt-flow/stargazers"><img src="https://img.shields.io/github/stars/Boom-Vitt/laya-chatgpt-flow?style=flat-square&color=14b8a6&labelColor=0b1220" alt="stars" /></a>
+<a href="https://github.com/Boom-Vitt/laya-chatgpt-flow/commits/main"><img src="https://img.shields.io/github/last-commit/Boom-Vitt/laya-chatgpt-flow?style=flat-square&color=14b8a6&labelColor=0b1220" alt="last commit" /></a>
+<a href="https://github.com/Boom-Vitt"><img src="https://img.shields.io/badge/by-BoomBigNose-14b8a6?style=flat-square&labelColor=0b1220" alt="by BoomBigNose" /></a>
+
+</div>
+<!-- BBN:HEADER:END -->
+
 <p align="center">
-  <img src="assets/hero.svg" alt="Laya + ChatGPT: ChatGPT วางแผน, Laya 421M เลือกการกดเว็บ, Google Flow สร้างคลิป 16 วินาที" width="100%">
 </p>
 
 <h1 align="center">Laya + ChatGPT → Google Flow</h1>
@@ -193,3 +204,15 @@ uv run python flow.py model-check
 แนวคิดเวิร์กโฟลว์มาจาก [ChatGPT × Google Flow ทำหนังสั้นจีนแนวตั้ง — BoomBigNose](https://youtu.be/7ZbYX93n4GY) ส่วนการจัดหน้าใช้แนวทางภาพสาธิตเด่นและ quick start ที่อ่านง่ายจาก [Browser Use](https://github.com/browser-use/browser-use), [Claude Code](https://github.com/anthropics/claude-code) และ [MarkItDown](https://github.com/microsoft/markitdown) ออกแบบแบนเนอร์ใหม่สำหรับ repo นี้
 
 โค้ด **MIT** · Laya/โมเดล **Apache-2.0** · โปรเจกต์ทดลองอิสระ ไม่ใช่ผลิตภัณฑ์ของ OpenAI หรือ Google — [แหล่งที่มาและสิทธิ์ทั้งหมด](THIRD_PARTY_NOTICES.md)
+
+<!-- BBN:FOOTER:START -->
+---
+
+<div align="center">
+
+**สร้างโดย [BoomBigNose](https://github.com/Boom-Vitt)** · [Kruoop.com](https://kruoop.com) แหล่งเรียน AI + คอมมูนิตี้ · [Seeneo.ai](https://seeneo.ai) · [YouTube 220K](https://www.youtube.com/@BoomBigNose)
+
+<sub>ถ้าโปรเจกต์นี้มีประโยชน์ กด ⭐ ให้กำลังใจกันได้เลย</sub>
+
+</div>
+<!-- BBN:FOOTER:END -->
